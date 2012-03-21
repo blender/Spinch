@@ -48,7 +48,8 @@
     devComController.delegate = [SpinchModel sharedModel];
     
     _sharedSurfaceComController = [MSSCommunicationController sharedController];
-    [_sharedSurfaceComController connectToHost:@"169.254.59.237" onPort:4568];
+    //[_sharedSurfaceComController connectToHost:@"169.254.59.237" onPort:4568];
+    [_sharedSurfaceComController connectToHost:@"129.16.213.195" onPort:4568];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         

@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11A511</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1934</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<string key="IBDocument.SystemVersion">11D50d</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.AppKitVersion">1138.32</string>
+		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">931</string>
+			<string key="NS.object.0">933</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBUIButton</string>
@@ -239,16 +239,10 @@
 					<string key="className">iPhoneViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="connectToDevice:">id</string>
 						<string key="handlePinchGesture:">UIPinchGestureRecognizer</string>
 						<string key="handleRotateGesture:">UIRotationGestureRecognizer</string>
-						<string key="searchForDevice:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="connectToDevice:">
-							<string key="name">connectToDevice:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="handlePinchGesture:">
 							<string key="name">handlePinchGesture:</string>
 							<string key="candidateClassName">UIPinchGestureRecognizer</string>
@@ -256,10 +250,6 @@
 						<object class="IBActionInfo" key="handleRotateGesture:">
 							<string key="name">handleRotateGesture:</string>
 							<string key="candidateClassName">UIRotationGestureRecognizer</string>
-						</object>
-						<object class="IBActionInfo" key="searchForDevice:">
-							<string key="name">searchForDevice:</string>
-							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
@@ -296,6 +286,6 @@
 			<string key="NS.key.0">Smiley1001.png</string>
 			<string key="NS.object.0">{608, 608}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">931</string>
+		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>
 </archive>

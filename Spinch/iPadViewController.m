@@ -20,7 +20,6 @@
     model = [SpinchModel sharedModel];
     
     //self.colorMixerController = [[ColorMixerViewController alloc] initWithNibName:@"ColorMixerViewController" bundle:[NSBundle mainBundle]];
-    
     self.colorMixerController = [[ColorMixerViewController alloc]init];
     self.colorMixerController.hueOffSet = 12.0f/24.0;
     CGRect rect = [[UIScreen mainScreen] applicationFrame];
