@@ -10,9 +10,11 @@
 
 @implementation iPhoneViewController
 
+@synthesize sizeSlider = _sizeSlider;
+@synthesize opacitySlider = _opacitySlider;
 @synthesize imageView;
-@synthesize connectButton = _connectButton;
 @synthesize colorMixerController = _colorMixerController;
+@synthesize phoneViewController = _phoneViewController;
 
 - (void)didReceiveMemoryWarning
 {
@@ -30,13 +32,13 @@
     [SpinchModel sharedModel].isColorMixerDisplayed = NO;
     [SpinchModel sharedModel].isToolControllerDisplayed = YES;
     
-    rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotateGesture:)];
+    //rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotateGesture:)];
     pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
     
-    rotationGestureRecognizer.delegate = self;
+    //rotationGestureRecognizer.delegate = self;
     pinchGestureRecognizer.delegate = self;
     
-    [self.view addGestureRecognizer:rotationGestureRecognizer];
+    //[self.view addGestureRecognizer:rotationGestureRecognizer];
     [self.view addGestureRecognizer:pinchGestureRecognizer];
     
     [self.view addSubview:imageView];
@@ -45,6 +47,8 @@
     lastScale = 0.0f;
     pinchTimes = 0;
     rotateTimes = 0;
+    
+    isPhoneViewControllerDisplayed = NO;
 }
 
 #pragma mark -
@@ -71,21 +75,9 @@
         
             float angle = [MSSCContactDescriptor orientationOfDescriptor:device.contactDescriptor relativeToDescriptor:canvas];
             
-            if( angle > 20.0f && angle  < 140.0f){
+            if( (angle > 320.0f || angle < 80.0f ) || (angle > 100.0f && angle < 210.0f )){
                 
-                if(![SpinchModel sharedModel].isColorMixerDisplayed){
-                
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    self.colorMixerController = [[ColorMixerViewController alloc] init];
-                    [SpinchModel sharedModel].isColorMixerDisplayed = YES;
-                    [SpinchModel sharedModel].isToolControllerDisplayed = NO;
-                    [self presentViewController:self.colorMixerController animated:YES completion:nil];
-                }
-            
-            }
-            
-            
-            if( angle < 20.0f || angle > 140.0f ){
+                isPhoneViewControllerDisplayed = NO;
                 
                 if(![SpinchModel sharedModel].isToolControllerDisplayed){
                     [self dismissViewControllerAnimated:YES completion:nil];
@@ -94,6 +86,52 @@
                     [SpinchModel sharedModel].isToolControllerDisplayed = YES;
                 }
             }
+            
+            if((angle  > 215.0f && angle < 315.0f)){
+                
+                
+                
+                if(![SpinchModel sharedModel].isColorMixerDisplayed){
+                    
+                    if(isPhoneViewControllerDisplayed){
+                        
+                        isPhoneViewControllerDisplayed = NO;
+                        [self.phoneViewController dismissViewControllerAnimated:YES completion:nil];
+                    }
+                    else{
+                     
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    }
+                    self.colorMixerController = [[ColorMixerViewController alloc] init];
+                    [SpinchModel sharedModel].isColorMixerDisplayed = YES;
+                    [SpinchModel sharedModel].isToolControllerDisplayed = NO;
+                    [self presentViewController:self.colorMixerController animated:YES completion:nil];
+                }
+                
+            }
+            /*
+            if((angle  > 170.0f && angle < 215.0f)){
+
+                if (isPhoneViewControllerDisplayed == NO) {
+                    
+                    [SpinchModel sharedModel].isColorMixerDisplayed = NO;
+
+                    //[self dismissViewControllerAnimated:YES completion:nil];
+                    self.phoneViewController = [[PhoneViewController alloc] initWithImage:[UIImage imageNamed:@"blank.png"]];
+                    
+                    if([SpinchModel sharedModel].isToolControllerDisplayed){
+                        [SpinchModel sharedModel].isToolControllerDisplayed = NO;
+                        [self presentViewController:self.phoneViewController animated:YES completion:nil];
+                    }
+                    else{
+                        [SpinchModel sharedModel].isToolControllerDisplayed = NO;
+                        [self.presentedViewController presentViewController:self.phoneViewController animated:YES completion:nil];
+                    }
+                    isPhoneViewControllerDisplayed = YES;
+
+                }
+            }
+            */
         }
     }
     else{
@@ -160,15 +198,28 @@
 
 - (void) dealloc {
 
-    [rotationGestureRecognizer release];
-    [pinchGestureRecognizer release];
+    //[rotationGestureRecognizer release];
+    //[pinchGestureRecognizer release];
     self.colorMixerController = nil;
     [super dealloc];
 
 }
 
+- (IBAction) sizeSliderValueChanged:(UISlider *) sender{
+
+    [SpinchModel sharedModel].toolWith = 50.0*[sender value];
+    
+}
+
+- (IBAction) opacitySliderValueChanged:(UISlider *)sender{
+
+    [SpinchModel sharedModel].toolAlpha = 1.0*[sender value]; 
+}
+
+
 #pragma mark - Gersture Handling
 
+/*
 -(IBAction) handleRotateGesture:(UIRotationGestureRecognizer *) recognizer
 {
     
@@ -195,14 +246,22 @@
     if(rotateTimes > 1) rotateTimes = 0;
      
      */
-    
+    /*
+   
     CGFloat imgRotation = [recognizer rotation] - lastRotation;
     imageView.transform = CGAffineTransformRotate(imageView.transform, imgRotation);
     lastRotation = [recognizer rotation];
-    NSLog(@"Rotation: %f", [recognizer rotation]);
-    [SpinchModel sharedModel].toolAlpha = 1* [recognizer rotation];
+    
+    float Arotation = fabsf([recognizer rotation]);
+    int rot = Arotation;
+    float rotation = Arotation - rot;
+    NSLog(@"Rotation: %f", rotation);
+    
+    [SpinchModel sharedModel].toolAlpha = 1* rotation;
 
 }
+*/
+
 
 -(IBAction) handlePinchGesture:(UIPinchGestureRecognizer *) recognizer
 {
@@ -229,6 +288,7 @@
     if(pinchTimes > 1) pinchTimes = 0;
      */
     
+
     if([recognizer state] == UIGestureRecognizerStateEnded) {
         
 		lastScale = 1.0;
@@ -244,7 +304,7 @@
     float increment = (lastScale - [recognizer scale]);
     
     increment = fabs(increment);
-    NSLog(@"Increment %f, 10%% %f", increment, lastScale*0.01);
+    //NSLog(@"Increment %f, 10%% %f", increment, lastScale*0.01);
     if(increment > lastScale*0.01){
         if(lastScale > 0)
             toolscale = 5;
@@ -260,5 +320,4 @@
 
     return YES;
 }
-
 @end

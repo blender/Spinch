@@ -17,6 +17,7 @@
 @synthesize colorSaturation;
 @synthesize isColorMixerDisplayed;
 @synthesize isToolControllerDisplayed;
+@synthesize lineCap;
 //not serialized
 @synthesize localHue;
 
@@ -71,6 +72,13 @@
         pos += sizeof(unsigned char);
         unsigned char LisToolControllerDisplayed = *(&bytes[pos]);
         sp.isToolControllerDisplayed = (LisToolControllerDisplayed == 1) ? YES: NO; 
+        
+        //pos += sizeof(unsigned char);
+        //unsigned char LlineCap = *(&bytes[pos]);
+        //sp.lineCap = LlineCap;
+    }
+    else {
+        NSLog(@"Spinch Model from network was not 22 bytes long");
     }
     return sp;
 }
@@ -85,10 +93,12 @@
     int LtoolWith = toolWith * 100.0f;
     LtoolWith = CFSwapInt32HostToLittle(LtoolWith);
     memcpy(&(bytes[pos]), &LtoolWith, sizeof(int));
+    //NSLog(@"Serializing Toolwith: %d", LtoolWith);
     
     pos += sizeof(int);
     int LtoolAlpha = toolAlpha * 100.0f;
     memcpy(&(bytes[pos]), &LtoolAlpha, sizeof(int));
+    //NSLog(@"Serializing ToolAlpha: %d", LtoolAlpha);
     
     pos += sizeof(int);
     int LcolorSaturation = colorSaturation * 100.0f;
@@ -102,13 +112,17 @@
     int LcolorBrightness = colorBrightness * 100.0f;
     memcpy(&(bytes[pos]), &LcolorBrightness, sizeof(int));
     
-    pos += sizeof(unsigned char);
+    pos += sizeof(int);
     unsigned char LisColorMixerDisplayed = (isColorMixerDisplayed == YES) ? 1 : 0;
-    memcpy(&(bytes[pos]), &LisColorMixerDisplayed, sizeof(int));
+    memcpy(&(bytes[pos]), &LisColorMixerDisplayed, sizeof(unsigned char));
     
     pos += sizeof(unsigned char);
     unsigned char LisToolControllerDisplayed = (isToolControllerDisplayed == YES) ? 1 : 0;
-    memcpy(&(bytes[pos]), &LisToolControllerDisplayed, sizeof(int));
+    memcpy(&(bytes[pos]), &LisToolControllerDisplayed, sizeof(unsigned char));
+    
+    //pos += sizeof(unsigned char);
+    //unsigned char LlineCap = self.lineCap;
+    //memcpy(&(bytes[pos]), &LlineCap, sizeof(unsigned char));
     
     NSData* data = [NSData dataWithBytes:bytes length:size];
     
@@ -121,7 +135,7 @@
     
     if(self){
         
-        self.toolWith = 50.0f;
+        self.toolWith = 20.0f;
         self.toolAlpha = 1.0f;
         self.colorSaturation = 1.0f;
         self.colorHue = 1.0f;
@@ -130,6 +144,7 @@
         self.isToolControllerDisplayed = NO;
         
         //not serialized
+        self.lineCap = kCGLineCapRound;
         self.localHue = 1.0;
         
     }
@@ -146,6 +161,7 @@
     if(canvasDev != nil){
     
         InterDeviceComController* comController = [InterDeviceComController sharedController];
+        //canvasDev.ipAddr = @"169.254.225.120";
         [comController sendData:[self data] toDevice:canvasDev]; 
     }
 
@@ -165,46 +181,11 @@
     self.colorBrightness = model.colorBrightness;
     self.isColorMixerDisplayed = model.isColorMixerDisplayed;
     self.isToolControllerDisplayed = model.isToolControllerDisplayed;
-    self.localHue = model.localHue;
-}
 
-
-#pragma mark -
-#pragma mark NSCoding
-
-- (id) initWithCoder:(NSCoder *)aDecoder 
-{
     
-    if((self = [super init])){
-        
-        toolWith = [aDecoder decodeInt32ForKey:@"toolWith"];
-        toolWith = toolWith / 100.0f;
-        toolAlpha = [aDecoder decodeInt32ForKey:@"toolAlpha"];
-        toolAlpha = toolWith / 100.0f;
-        colorSaturation = [aDecoder decodeInt32ForKey:@"colorSaturation"];
-        colorSaturation = colorSaturation / 100.0f;
-        colorHue = [aDecoder decodeInt32ForKey:@"colorHue"];
-        colorHue = colorHue / 100.0f;
-        colorBrightness = [aDecoder decodeInt32ForKey:@"colorBrightness"];
-        colorBrightness = colorBrightness / 100.0f;
-        isColorMixerDisplayed = [aDecoder decodeBoolForKey:@"isColorMixerDisplayed"];
-        isToolControllerDisplayed = [aDecoder decodeBoolForKey:@"isColorMixerDisplayed"];
-    }
-    
-    return self;
-}
-
-- (void) encodeWithCoder:(NSCoder*)encoder 
-{
-    
-    [encoder encodeInt32:toolWith*100 forKey:@"toolWith"];
-    [encoder encodeInt32:toolAlpha*100 forKey:@"toolAlpha"];
-    [encoder encodeInt32:colorSaturation*100 forKey:@"colorSaturation"];
-    [encoder encodeInt32:colorHue*100 forKey:@"colorHue"];
-    [encoder encodeInt32:colorBrightness*100 forKey:@"colorBrightness"];
-    [encoder encodeBool:isColorMixerDisplayed forKey:@"isColorMixerDisplayed"];
-    [encoder encodeBool:isToolControllerDisplayed forKey:@"isToolControllerDisplayed"];
-    
+    //not serialized
+    //self.lineCap = model.lineCap;
+    //self.localHue = model.localHue;
 }
 
 #pragma mark -

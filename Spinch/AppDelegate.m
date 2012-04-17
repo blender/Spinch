@@ -48,8 +48,8 @@
     devComController.delegate = [SpinchModel sharedModel];
     
     _sharedSurfaceComController = [MSSCommunicationController sharedController];
-    //[_sharedSurfaceComController connectToHost:@"169.254.59.237" onPort:4568];
-    [_sharedSurfaceComController connectToHost:@"129.16.213.195" onPort:4568];
+    [_sharedSurfaceComController connectToHost:@"169.254.59.237" onPort:4568];
+    //[_sharedSurfaceComController connectToHost:@"129.16.213.195" onPort:4568];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         
@@ -59,6 +59,7 @@
         self.window.rootViewController = self.iPhoneViewController;
         _sharedSurfaceComController.delegate = self.iPhoneViewController;
         self.device = [SpinchDevice sharedDevice];
+        [NSTimer scheduledTimerWithTimeInterval:0.2 target:[SpinchModel sharedModel] selector:@selector(transmitToCanvasDevice) userInfo:nil repeats:YES];
         
     } else {
         
@@ -71,9 +72,8 @@
     }
     
 
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:(_sharedSurfaceComController) selector:@selector(getContacsFromCodeine) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:0.2 target:(_sharedSurfaceComController) selector:@selector(getContacsFromCodeine) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:(_sharedSurfaceComController) selector:@selector(getDevicesFromCodeine) userInfo:nil repeats:YES];
-    [NSTimer scheduledTimerWithTimeInterval:0.2 target:[SpinchModel sharedModel] selector:@selector(transmitToCanvasDevice) userInfo:nil repeats:YES];
     
     [self.window makeKeyAndVisible];
     return YES;

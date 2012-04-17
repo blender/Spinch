@@ -24,6 +24,11 @@
 		8ACBF2B21430987200CE7900 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ACBF2B01430987200CE7900 /* ViewController_iPhone.xib */; };
 		8ACBF2B51430987200CE7900 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ACBF2B31430987200CE7900 /* ViewController_iPad.xib */; };
 		8ACBF2C214309ED200CE7900 /* Smiley1001.png in Resources */ = {isa = PBXBuildFile; fileRef = 8ACBF2C114309ED200CE7900 /* Smiley1001.png */; };
+		8AD84157153493F1005706C3 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AD84156153493F1005706C3 /* blank.png */; };
+		8AF073A61533215500DA2CB6 /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA48189153312760081140B /* PhoneViewController.m */; };
+		8AF073AF153335F100DA2CB6 /* iPhone3G.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AF073AE153335F100DA2CB6 /* iPhone3G.png */; };
+		8AF073B215333A9C00DA2CB6 /* lineCapSquared.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AF073B015333A9C00DA2CB6 /* lineCapSquared.png */; };
+		8AF073B51533426A00DA2CB6 /* lineCapRound.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AF073B41533426A00DA2CB6 /* lineCapRound.png */; };
 		8AF9D70F1507A7D9006D0ECA /* SpinchDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9D70E1507A7D9006D0ECA /* SpinchDevice.m */; };
 		8AF9D7121507BCE4006D0ECA /* SpinchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9D7111507BCE4006D0ECA /* SpinchModel.m */; };
 /* End PBXBuildFile section */
@@ -78,6 +83,8 @@
 		8A8D5B2E150503550073D864 /* ColorMixerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColorMixerViewController.xib; sourceTree = "<group>"; };
 		8A8D5B6115050D420073D864 /* pieMenu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pieMenu.xcodeproj; path = ../../pieMenu/pieMenu.xcodeproj; sourceTree = "<group>"; };
 		8A9206E8150F5C3800325798 /* InterDeviceCom.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InterDeviceCom.xcodeproj; path = ../../InterDeviceCom/InterDeviceCom.xcodeproj; sourceTree = "<group>"; };
+		8AA48188153312760081140B /* PhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneViewController.h; sourceTree = "<group>"; };
+		8AA48189153312760081140B /* PhoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneViewController.m; sourceTree = "<group>"; };
 		8ACBF2971430987200CE7900 /* Spinch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spinch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ACBF29B1430987200CE7900 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8ACBF29D1430987200CE7900 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -93,6 +100,10 @@
 		8ACBF2B11430987200CE7900 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		8ACBF2B41430987200CE7900 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 		8ACBF2C114309ED200CE7900 /* Smiley1001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Smiley1001.png; sourceTree = "<group>"; };
+		8AD84156153493F1005706C3 /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
+		8AF073AE153335F100DA2CB6 /* iPhone3G.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhone3G.png; sourceTree = "<group>"; };
+		8AF073B015333A9C00DA2CB6 /* lineCapSquared.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lineCapSquared.png; sourceTree = "<group>"; };
+		8AF073B41533426A00DA2CB6 /* lineCapRound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lineCapRound.png; sourceTree = "<group>"; };
 		8AF9D70D1507A7D9006D0ECA /* SpinchDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinchDevice.h; sourceTree = "<group>"; };
 		8AF9D70E1507A7D9006D0ECA /* SpinchDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinchDevice.m; sourceTree = "<group>"; };
 		8AF9D7101507BCE4006D0ECA /* SpinchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinchModel.h; sourceTree = "<group>"; };
@@ -171,6 +182,8 @@
 				8A54050E150658EF00C0D32D /* ColorTileView.m */,
 				8AF9D70D1507A7D9006D0ECA /* SpinchDevice.h */,
 				8AF9D70E1507A7D9006D0ECA /* SpinchDevice.m */,
+				8AA48188153312760081140B /* PhoneViewController.h */,
+				8AA48189153312760081140B /* PhoneViewController.m */,
 				8AF9D7101507BCE4006D0ECA /* SpinchModel.h */,
 				8AF9D7111507BCE4006D0ECA /* SpinchModel.m */,
 				8A8D5B2E150503550073D864 /* ColorMixerViewController.xib */,
@@ -195,6 +208,10 @@
 		8ACBF2BF14309EB200CE7900 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				8AD84156153493F1005706C3 /* blank.png */,
+				8AF073B41533426A00DA2CB6 /* lineCapRound.png */,
+				8AF073B015333A9C00DA2CB6 /* lineCapSquared.png */,
+				8AF073AE153335F100DA2CB6 /* iPhone3G.png */,
 				8ACBF2C114309ED200CE7900 /* Smiley1001.png */,
 			);
 			name = Assets;
@@ -301,6 +318,10 @@
 				8ACBF2B51430987200CE7900 /* ViewController_iPad.xib in Resources */,
 				8ACBF2C214309ED200CE7900 /* Smiley1001.png in Resources */,
 				8A8D5B30150503550073D864 /* ColorMixerViewController.xib in Resources */,
+				8AF073AF153335F100DA2CB6 /* iPhone3G.png in Resources */,
+				8AF073B215333A9C00DA2CB6 /* lineCapSquared.png in Resources */,
+				8AF073B51533426A00DA2CB6 /* lineCapRound.png in Resources */,
+				8AD84157153493F1005706C3 /* blank.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AF073A61533215500DA2CB6 /* PhoneViewController.m in Sources */,
 				8ACBF2A81430987200CE7900 /* main.m in Sources */,
 				8ACBF2AC1430987200CE7900 /* AppDelegate.m in Sources */,
 				8ACBF2AF1430987200CE7900 /* iPhoneViewController.m in Sources */,

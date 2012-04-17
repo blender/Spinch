@@ -11,7 +11,16 @@
 #import "InterDeviceComController.h"
 #import "SpinchDevice.h"
 
-@interface SpinchModel : NSObject <InterDeviceComProtocol, NSCoding>
+#ifdef SIMULATOR
+#define HALF_AN_IPHONE 230
+#define HALF_AN_IPAD 300
+#endif
+#ifndef SIMULATOR
+#define HALF_AN_IPHONE 380
+#define HALF_AN_IPAD 300
+#endif
+
+@interface SpinchModel : NSObject <InterDeviceComProtocol>
 
 @property (nonatomic, assign) float toolWith;
 @property (nonatomic, assign) float toolAlpha;
@@ -21,6 +30,7 @@
 @property (nonatomic, assign) BOOL isColorMixerDisplayed;
 @property (nonatomic, assign) BOOL isToolControllerDisplayed;
 //not serialized
+@property (nonatomic, assign) unsigned char lineCap;
 @property (nonatomic, assign) float localHue;
 
 +(SpinchModel *) sharedModel;

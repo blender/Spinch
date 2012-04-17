@@ -53,18 +53,74 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    for (int i = 0; i < MAX_TILES; i++) {
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    
+        for (int i = 0; i < MAX_TILES-2; i++) {
+            
+            float saturation = 1.0;//[SpinchModel sharedModel].colorSaturation;
+            float brightness = 1.0;//[SpinchModel sharedModel].colorBrightness;
+            
+            CGRect frame = CGRectMake(10+((i*MAX_TILE_SIZE)%300), 30+((i*MAX_TILE_SIZE)/300)*MAX_TILE_SIZE, MAX_TILE_SIZE, MAX_TILE_SIZE);
+            
+            ColorTileView *ct = [ColorTileView tileWithFrame:frame andColor:[UIColor colorWithHue:(i*(1.0/(MAX_TILES*2)))+_hueOffSet saturation:saturation brightness:brightness alpha:1.0]];
+            ct.tag = i+1;
+            [self.view addSubview:ct ];
+            //[[SpinchModel sharedModel] addObserver:ct forKeyPath:@"colorSaturation" options:NSKeyValueObservingOptionNew context:nil];
+            //[[SpinchModel sharedModel] addObserver:ct forKeyPath:@"colorBrightness" options:NSKeyValueObservingOptionNew context:nil];
+        }
+          
+        //BROWN
+        float saturation = 0.7f;//[SpinchModel sharedModel].colorSaturation;
+        float brightness = 0.37f;//[SpinchModel sharedModel].colorBrightness;
         
-        float saturation = 1.0;//[SpinchModel sharedModel].colorSaturation;
-        float brightness = 1.0;//[SpinchModel sharedModel].colorBrightness;
+        int k = 9;
         
-        CGRect frame = CGRectMake(10+((i*MAX_TILE_SIZE)%300), 30+((i*MAX_TILE_SIZE)/300)*MAX_TILE_SIZE, MAX_TILE_SIZE, MAX_TILE_SIZE);
+        CGRect frame = CGRectMake(10+((k*MAX_TILE_SIZE)%300), 30+((k*MAX_TILE_SIZE)/300)*MAX_TILE_SIZE, MAX_TILE_SIZE, MAX_TILE_SIZE);
         
-        ColorTileView *ct = [ColorTileView tileWithFrame:frame andColor:[UIColor colorWithHue:(i*(1.0/(MAX_TILES*2)))+_hueOffSet saturation:saturation brightness:brightness alpha:1.0]];
-        ct.tag = i+1;
+        ColorTileView *ct = [ColorTileView tileWithFrame:frame andColor:[UIColor colorWithHue:0.12f saturation:saturation brightness:brightness alpha:1.0]];
+        ct.tag = k+1;
         [self.view addSubview:ct ];
-        [[SpinchModel sharedModel] addObserver:ct forKeyPath:@"colorSaturation" options:NSKeyValueObservingOptionNew context:nil];
-        [[SpinchModel sharedModel] addObserver:ct forKeyPath:@"colorBrightness" options:NSKeyValueObservingOptionNew context:nil];
+        
+        //WHITE
+        saturation = 0.0f;//[SpinchModel sharedModel].colorSaturation;
+        brightness = 1.0f;//[SpinchModel sharedModel].colorBrightness;
+        
+        k = 10;
+        
+        frame = CGRectMake(10+((k*MAX_TILE_SIZE)%300), 30+((k*MAX_TILE_SIZE)/300)*MAX_TILE_SIZE, MAX_TILE_SIZE, MAX_TILE_SIZE);
+        
+        ct = [ColorTileView tileWithFrame:frame andColor:[UIColor colorWithHue:0.5f saturation:saturation brightness:brightness alpha:1.0]];
+        ct.tag = k+1;
+        [self.view addSubview:ct ];
+        
+        //BLACK
+        saturation = 0.0f;//[SpinchModel sharedModel].colorSaturation;
+        brightness = 0.0f;//[SpinchModel sharedModel].colorBrightness;
+        
+        k = 11;
+        
+        frame = CGRectMake(10+((k*MAX_TILE_SIZE)%300), 30+((k*MAX_TILE_SIZE)/300)*MAX_TILE_SIZE, MAX_TILE_SIZE, MAX_TILE_SIZE);
+        
+        ct = [ColorTileView tileWithFrame:frame andColor:[UIColor colorWithHue:0.1f saturation:saturation brightness:brightness alpha:1.0]];
+        ct.tag = k+1;
+        [self.view addSubview:ct ];
+    }
+    else {
+        for (int i = 0; i < MAX_TILES; i++) {
+            
+            float saturation = 1.0;//[SpinchModel sharedModel].colorSaturation;
+            float brightness = 1.0;//[SpinchModel sharedModel].colorBrightness;
+            
+            CGRect frame = CGRectMake(10+((i*MAX_TILE_SIZE)%300), 30+((i*MAX_TILE_SIZE)/300)*MAX_TILE_SIZE, MAX_TILE_SIZE, MAX_TILE_SIZE);
+            
+            ColorTileView *ct = [ColorTileView tileWithFrame:frame andColor:[UIColor colorWithHue:(i*(1.0/(MAX_TILES*2)))+_hueOffSet saturation:saturation brightness:brightness alpha:1.0]];
+            ct.tag = i+1;
+            [self.view addSubview:ct ];
+            //[[SpinchModel sharedModel] addObserver:ct forKeyPath:@"colorSaturation" options:NSKeyValueObservingOptionNew context:nil];
+            //[[SpinchModel sharedModel] addObserver:ct forKeyPath:@"colorBrightness" options:NSKeyValueObservingOptionNew context:nil];
+        }
+
     }
 }
 
@@ -131,15 +187,70 @@
     CGPoint locationInView = [(NSValue *) [touches objectForKey:@"location"] CGPointValue];
     
     int tile = [self tileIdFromLocation:locationInView];
-    if(tile >= 0 && tile <MAX_TILES){
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         
-        ColorTileView* aTile = (ColorTileView*)[self.view viewWithTag:tile+1];
-        [SpinchModel sharedModel].colorHue = (tile*(1.0/(MAX_TILES*2)))+_hueOffSet;
-        [SpinchModel sharedModel].localHue = (tile*(1.0/(MAX_TILES*2)))+_hueOffSet;
-        aTile.isSelected  = YES;
-        [aTile setNeedsDisplay];
-        if(self.selectedTiles != nil){
-            [self.selectedTiles addObject:aTile];
+        if(tile >= 0 && tile <MAX_TILES-3){
+            
+            ColorTileView* aTile = (ColorTileView*)[self.view viewWithTag:tile+1];
+            [SpinchModel sharedModel].colorHue = (tile*(1.0/(MAX_TILES*2)))+_hueOffSet;
+            [SpinchModel sharedModel].localHue = (tile*(1.0/(MAX_TILES*2)))+_hueOffSet;
+            [SpinchModel sharedModel].colorSaturation = 1.0f;
+            [SpinchModel sharedModel].colorBrightness = 1.0f;
+            aTile.isSelected  = YES;
+            [aTile setNeedsDisplay];
+            if(self.selectedTiles != nil){
+                [self.selectedTiles addObject:aTile];
+            }
+        }else if(tile >= 0 && tile <MAX_TILES){
+                        
+            switch (tile) {
+                case 9:
+                    //BROWN
+                    [SpinchModel sharedModel].colorHue = 0.12f;
+                    [SpinchModel sharedModel].colorSaturation = 0.7f;
+                    [SpinchModel sharedModel].colorBrightness = 0.37f;
+                    [SpinchModel sharedModel].localHue = 0.5f ;
+                    break;
+                case 10:
+                    //WHITE
+                    [SpinchModel sharedModel].colorHue = 0.1f;
+                    [SpinchModel sharedModel].colorSaturation = 0.0;
+                    [SpinchModel sharedModel].colorBrightness = 1.0f;
+                    [SpinchModel sharedModel].localHue = 0.1f ;
+                    break;
+                case 11:
+                    //BLACK
+                    [SpinchModel sharedModel].colorHue = 0.1f;
+                    [SpinchModel sharedModel].colorSaturation = 0.0f;
+                    [SpinchModel sharedModel].colorBrightness = 0.0f;
+                    [SpinchModel sharedModel].localHue = 0.1f ;
+                    break;
+                default:
+                    break;
+            }
+            
+            ColorTileView* aTile = (ColorTileView*)[self.view viewWithTag:tile+1];
+            aTile.isSelected  = YES;
+            [aTile setNeedsDisplay];
+            if(self.selectedTiles != nil){
+                [self.selectedTiles addObject:aTile];
+            }
+        }
+        
+    }
+    
+    else{   
+        if(tile >= 0 && tile <MAX_TILES){
+            
+            ColorTileView* aTile = (ColorTileView*)[self.view viewWithTag:tile+1];
+            [SpinchModel sharedModel].colorHue = (tile*(1.0/(MAX_TILES*2)))+_hueOffSet;
+            [SpinchModel sharedModel].localHue = (tile*(1.0/(MAX_TILES*2)))+_hueOffSet;
+            aTile.isSelected  = YES;
+            [aTile setNeedsDisplay];
+            if(self.selectedTiles != nil){
+                [self.selectedTiles addObject:aTile];
+            }
         }
     }
 
